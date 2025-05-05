@@ -2,9 +2,9 @@ id: 156
 user: eq19
 span: span-137
 title: eQuantum
-baseurl: /rufus
-repository: WeakNegative/rufus
-action: WeakNegative/wpt/actions/runs/14825953587
+baseurl: /slickmap
+repository: WeakNegative/slickmap
+action: WeakNegative/wpt/actions/runs/14827920117
 description: eQuantum Project - Weak Negative Boson
 
 #debug:
@@ -49,5 +49,5 @@ plugins:
 
 track:
   spin: [11, 12]
-  pinned: [maps, feed, lexer, parser, syntax, grammar, ohmyzsh, grub, scrapy, screen, wpt, rufus]
+  pinned: [maps, feed, lexer, parser, syntax, grammar, ohmyzsh, grub, scrapy, screen, wpt, slickmap]
   organization: [Chetabahana, FeedMapping, GlobalZones, HybridModels, JunctionTerms, KernelPatterns, MappingSystem, NeuralSystem, ObjectModules, VirtualNetworks, WeakNegative, WeakPositive, ZeroWeak]

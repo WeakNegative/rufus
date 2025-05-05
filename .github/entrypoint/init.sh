@@ -56,7 +56,7 @@ if [[ "${JOBS_ID}" == "1" ]]; then
   if diff -qr ${GITHUB_WORKSPACE}/.github /home/runner/work/_actions/eq19/eq19/v2/.github >/dev/null; then
     echo -e "\n$hr\nCONFIG\n$hr"
     cat /home/runner/work/_actions/eq19/eq19/v2/.github/templates/jekyll_config.yml > $RUNNER_TEMP/_config.yml
-    export PATH=/home/runner/work/_actions/eq19/eq19/v2/.github/entrypoint:$PATH && artifact.sh
+    export PATH=/home/runner/work/_actions/eq19/eq19/v2/.github/entrypoint:$PATH && source artifact.sh
 
     cat $RUNNER_TEMP/orgs.json > $1/user_data/ft_client/test_client/results/orgs.json
     gh variable set JEKYLL_CONFIG --body "$(cat $RUNNER_TEMP/_config.yml)"
@@ -176,8 +176,13 @@ else
   shopt -s dotglob && mv -f ${RUNNER_TEMP//\\//}/gh-source/* .
 
   # Get the variable value and save to file.json
-  gh variable list
-  gh variable get JEKYLL_CONFIG > _config.yml && ls -lR .
+  curl -s -H "Authorization: token $GH_TOKEN" -H "Accept: application/vnd.github.v3+json" \
+    "https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/variables/JEKYLL_CONFIG" \
+    | jq -r '.value' > _config.yml
+
+  echo -e "\n$hr\nCONFIG\n$hr" && cat _config.yml
+  echo -e "\n$hr\nENVIRONTMENT\n$hr" && printenv | sort
+  echo -e "\n$hr\nWORKSPACE\n$hr" && ls -lR .
 
 fi
 
